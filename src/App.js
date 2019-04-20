@@ -11,11 +11,26 @@ class BooksApp extends React.Component {
     state = {
         books : []
     }
+
     /* get all books currently in the bookshelves in my app */
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({ books })
-        })
+        }).catch((error) => { console.log ('Error on getting all books') })
+    }
+
+    /* move book between shelves */
+    moveBook = (currentBook, shelf) => {
+        BooksAPI.update(currentBook, shelf).then((response) => {
+            // change the book's shelf
+            currentBook.shelf = shelf;
+            // update state with current book that moved to another shelf
+            this.setState(state => ({
+            books: state.books
+                .filter(book => book.id !== currentBook.id)
+                .concat(currentBook)
+            }))
+        }).catch((error) => { console.log ('Error on moving book') })
     }
 
     render() {
@@ -24,7 +39,10 @@ class BooksApp extends React.Component {
         return (
              <div className="app">
                 <Route exact path="/" render={() => (
-                    <ListBooks books={books} />
+                    <ListBooks
+                        books={books}
+                        moveBook={this.moveBook}
+                    />
                 )}/>
                 <Route path="/Search" render={() => (
                     <SearchBooks />

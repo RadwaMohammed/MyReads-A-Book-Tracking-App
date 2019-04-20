@@ -2,7 +2,7 @@ import React from 'react'
 import BookShelfChanger from './BookShelfChanger'
 
 function Book (props) {
-	const { book, bookShelf } = props
+	const { book, bookShelf, moveBook } = props
 
 	return (
 		<div className="book">
@@ -18,7 +18,9 @@ function Book (props) {
 			</div>
 			<div className="book-shelf-changer">
 				<BookShelfChanger
+					book={book}
 					bookShelf={bookShelf}
+					moveBook={moveBook}
 				/>
 			</div>
 			</div>

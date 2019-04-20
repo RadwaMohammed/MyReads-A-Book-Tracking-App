@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
 function ListBooks (props) {
-	const { books } = props
+	const { books, moveBook } = props
 	return (
 		<div className="list-books">
 			<div className="list-books-title">
@@ -14,14 +14,17 @@ function ListBooks (props) {
 					<BookShelf
 						shelfName="Currently Reading"
 						books={ books.filter(book => book.shelf === "currentlyReading") }
+						moveBook={moveBook}
 					/>
 					<BookShelf
 						shelfName="Want to Read"
 						books={ books.filter(book => book.shelf === "wantToRead") }
+						moveBook={moveBook}
 					/>
 					<BookShelf
 						shelfName="Read"
 						books={ books.filter(book => book.shelf === "read") }
+						moveBook={moveBook}
 					/>
 				</div>
 			</div>
