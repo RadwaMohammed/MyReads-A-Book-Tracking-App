@@ -12,7 +12,11 @@ function Book (props) {
 					style={{
 						width: 128,
 						height: 193,
-						backgroundImage:`url(${book.imageLinks.thumbnail})`
+						/* Fix problem - some of books don't have thumbnail */
+						backgroundImage:`url(${ book.imageLinks
+							? book.imageLinks.thumbnail
+							: ''
+						})`
 					}}
 				>
 			</div>
@@ -25,7 +29,12 @@ function Book (props) {
 			</div>
 			</div>
 			<div className="book-title">{book.title}</div>
-			<div className="book-authors">{book.authors}</div>
+			<div className="book-authors">
+				{
+					/* Fix problem - some of books don't have authors */
+					book.authors ? book.authors.join(', ') : 'Author is unknown'
+				}
+			</div>
 		</div>
 	)
 }
