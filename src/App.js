@@ -21,15 +21,12 @@ class BooksApp extends React.Component {
 
     /* move book between shelves */
     moveBook = (currentBook, shelf) => {
-        BooksAPI.update(currentBook, shelf).then((response) => {
+        BooksAPI.update(currentBook, shelf).then(() => {
             // change the book's shelf
             currentBook.shelf = shelf;
             // update state with current book that moved to another shelf
-            this.setState(state => ({
-            books: state.books
-                .filter(book => book.id !== currentBook.id)
-                .concat(currentBook)
-            }))
+            const updatedBooks = this.state.books.filter(book => book.id !== currentBook.id);
+            this.setState( {books: [...updatedBooks, currentBook]})
         }).catch((error) => { console.log ('Error on moving book') })
     }
 

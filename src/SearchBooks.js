@@ -13,24 +13,33 @@ class SearchBooks extends Component {
 	/* search for book */
 	searchBooks = (query) =>{
 		this.setState({ query: query.trimStart() }, ()=>{
+			/* if user types into the search field run the search*/
 			if(query && query.length > 0) {
 				BooksAPI.search(query).then(searchedBooks => {
-					this.setState({ searchedBooks: searchedBooks });
+					/* set the correct shelf for searched books*/
+					searchedBooks.forEach(searchedBook=>{
+						searchedBook.shelf = 'none';
+						this.props.books.forEach(book=>{
+							if(book.id === searchedBook.id) {
+		                        searchedBook.shelf = book.shelf;
+		                   }
+						})
+					})
+				this.setState({ searchedBooks: searchedBooks });
 				}).catch(error => {
 					console.log('error on searching books');
 					this.setState({ searchedBooks: [] });
 				})
 			} else {
+				/*if query is empty reset the searchedBooks state*/
 				this.setState({ searchedBooks: [] });
 			}
 		})
 
 	}
 
-
 	render() {
-
-		const { moveBook } = this.props
+		const {  moveBook } = this.props
 		const { query, searchedBooks } = this.state
 
 		return (
@@ -47,28 +56,32 @@ class SearchBooks extends Component {
 					</div>
 	            </div>
 	            <div className="search-books-results">
-					<ol className="books-grid">
-						{
-							/* condition to be sure that Search results are not shown when
-							 * all of the text is deleted out of the search input box
-							*/
-							(searchedBooks.length > 0 && query.length > 0) &&(
-								searchedBooks.map(searchedBook => (
-									<li key={searchedBook.id}>
-										<Book
-											book={searchedBook}
-											moveBook={moveBook}
-											bookShelf={searchedBook.shelf}
-										/>
-									</li>
-								))
-							)
-						}
-					</ol>
+
+					{
+						/* condition to be sure that Search results are not shown when
+						 * all of the text is deleted out of the search input box
+						*/
+						(searchedBooks.length > 0 && query.length > 0) &&(
+							<ol className="books-grid">
+								{searchedBooks.map(searchedBook =>
+									(<li key={searchedBook.id}>
+											<Book
+												book={searchedBook}
+												moveBook={moveBook}
+												bookShelf={searchedBook.shelf}
+											/>
+									</li>)
+								)}
+							</ol>
+						)
+					}
+
 	            </div>
           </div>
 		)
 	}
 }
+
+
 
 export default SearchBooks
