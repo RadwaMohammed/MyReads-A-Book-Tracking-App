@@ -1,9 +1,9 @@
-import React from 'react'
-import BookShelfChanger from './BookShelfChanger'
-import PropTypes from 'prop-types'
+import React from 'react';
+import BookShelfChanger from './BookShelfChanger';
+import PropTypes from 'prop-types';
 
 function Book (props) {
-	const { book, bookShelf, moveBook } = props
+	const { book, bookShelf, moveBook } = props;
 
 	return (
 		<div className="book">
@@ -47,4 +47,4 @@ Book.propTypes = {
 	moveBook: PropTypes.func.isRequired
 }
 
-export default Book
+export default Book;

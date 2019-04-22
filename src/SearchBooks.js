@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Book from './Book'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Book from './Book';
+import PropTypes from 'prop-types';
 // import * as BooksAPI from './BooksAPI'
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
 
 class SearchBooks extends Component {
 	state = {
@@ -35,13 +35,13 @@ class SearchBooks extends Component {
 				/*if query is empty reset the searchedBooks state*/
 				this.setState({ searchedBooks: [] });
 			}
-		})
+		});
 
 	}
 
 	render() {
-		const {  moveBook } = this.props
-		const { query, searchedBooks } = this.state
+		const {  moveBook } = this.props;
+		const { query, searchedBooks } = this.state;
 
 		return (
 			<div className="search-books">
@@ -79,7 +79,7 @@ class SearchBooks extends Component {
 
 	            </div>
           </div>
-		)
+		);
 	}
 }
 
@@ -89,4 +89,4 @@ SearchBooks.propTypes = {
 	moveBook: PropTypes.func.isRequired
 }
 
-export default SearchBooks
+export default SearchBooks;

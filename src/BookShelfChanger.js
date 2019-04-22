@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BookShelfChanger extends Component {
 	state={
@@ -13,7 +13,7 @@ class BookShelfChanger extends Component {
 	}
 
 	render() {
-		const { shelf } = this.state
+		const { shelf } = this.state;
 		return (
 			<select onChange={ this.handleChange } value={ shelf }>
 				<option value="move" disabled>Move to...</option>
@@ -22,7 +22,7 @@ class BookShelfChanger extends Component {
 				<option value="read">Read</option>
 				<option value="none">None</option>
 			</select>
-		)
+		);
 	}
 }
 
@@ -33,4 +33,4 @@ BookShelfChanger.propTypes = {
 	moveBook: PropTypes.func.isRequired
 }
 
-export default BookShelfChanger
+export default BookShelfChanger;
