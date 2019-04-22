@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class BookShelfChanger extends Component {
 	state={
@@ -24,4 +25,12 @@ class BookShelfChanger extends Component {
 		)
 	}
 }
+
+/* validate data types */
+BookShelfChanger.propTypes = {
+	book: PropTypes.object.isRequired,
+	bookShelf: PropTypes.string.isRequired,
+	moveBook: PropTypes.func.isRequired
+}
+
 export default BookShelfChanger
