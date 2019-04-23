@@ -1,9 +1,9 @@
+// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import ListBooks from './ListBooks';
 import SearchBooks from './SearchBooks';
-// import * as BooksAPI from './BooksAPI'
-import * as BooksAPI from './BooksAPI';
 import './App.css';
 
 
@@ -25,8 +25,8 @@ class BooksApp extends React.Component {
             // change the book's shelf
             currentBook.shelf = shelf;
             // update state with current book that moved to another shelf
-            const updatedBooks = this.state.books.filter(book => book.id !== currentBook.id);
-            this.setState({books: [...updatedBooks, currentBook]});
+            this.setState(currentState => ({ books:
+                [...(currentState.books.filter(book => book.id !== currentBook.id)), currentBook]}));
         }).catch((error) => { console.log ('Error on moving book'); });
     }
 

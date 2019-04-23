@@ -1,10 +1,16 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf';
-import PropTypes from 'prop-types';
+
 
 function ListBooks (props) {
 	const { books, moveBook } = props;
+	const shelves = [
+		{ title: 'Currently Reading', key: 'currentlyReading' },
+		{ title: 'Want To Read', key: 'wantToRead' },
+		{ title: 'Read', key: 'read' }
+	];
 	return (
 		<div className="list-books">
 			<div className="list-books-title">
@@ -12,21 +18,18 @@ function ListBooks (props) {
 			</div>
 			<div className="list-books-content">
 				<div>
-					<BookShelf
-						shelfName="Currently Reading"
-						books={ books.filter(book => book.shelf === "currentlyReading") }
-						moveBook={moveBook}
-					/>
-					<BookShelf
-						shelfName="Want to Read"
-						books={ books.filter(book => book.shelf === "wantToRead") }
-						moveBook={moveBook}
-					/>
-					<BookShelf
-						shelfName="Read"
-						books={ books.filter(book => book.shelf === "read") }
-						moveBook={moveBook}
-					/>
+					{
+						shelves.map( (shelf, index) =>
+							(<BookShelf
+								key={index}
+								shelfName={shelf.title}
+								books={ books.filter(book => book.shelf === shelf.key) }
+								moveBook={moveBook}
+							/>)
+						)
+
+					}
+
 				</div>
 			</div>
 			<div className="open-search">
